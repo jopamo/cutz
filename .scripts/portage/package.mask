@@ -1,0 +1,3 @@
+#>sys-apps/sandbox-2.25
+>=sys-devel/gcc-13.0.0_pre20220828
+>=sys-devel/gcc-12.3.9999

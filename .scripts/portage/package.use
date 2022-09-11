@@ -1,0 +1,4 @@
+sys-devel/gcc graphite
+lxqt-base/lxqt-panel -alsa -mount -statusnotifier
+sys-boot/grub mount
+sys-libs/libxcrypt -compat

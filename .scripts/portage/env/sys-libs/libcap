@@ -1,0 +1,23 @@
+multilib_src_install() {
+	emake \
+		exec_prefix="${EPREFIX}" \
+		prefix="${EPREFIX}/usr" \
+		lib_prefix="${EPREFIX}/usr" \
+		lib="$(get_libdir)" \
+		SBINDIR="${EPREFIX}"/usr/sbin \
+		DESTDIR="${D}" install;
+
+	gen_usr_ldscript -a cap
+	gen_usr_ldscript -a psx
+	if ! use static-libs ; then
+		rm "${ED}"/usr/$(get_libdir)/lib{cap,psx}.a || die
+	fi
+
+	# install pam plugins ourselves
+	rm -rf "${ED}"/usr/$(get_libdir)/security || die
+
+	if use pam ; then
+		dopammod pam_cap/pam_cap.so
+		dopamsecurity '' pam_cap/capability.conf
+	fi
+}
