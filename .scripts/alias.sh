@@ -41,7 +41,7 @@ alias wget='wget -c'
 alias df='df -HT'
 alias du='du -ch --max-depth=1'
 
-alias rsync='rsync -apvz'
+alias rsync='rsync -apvz --zc=zstd'
 
 alias random4='tr -dc A-Za-z0-9 </dev/urandom | head -c 4 ; echo '''
 alias random8='tr -dc A-Za-z0-9 </dev/urandom | head -c 8 ; echo '''

@@ -9,7 +9,7 @@ UDEV_OPTIONAL=1
 
 QA_PKGCONFIG_VERSION=$(ver_cut 1)
 
-inherit bash-completion-r1 flag-o-matic linux-info meson-multilib python-any-r1 systemd toolchain-funcs udev usr-ldscript
+inherit bash-completion-r1 flag-o-matic linux-info meson-multilib pam python-any-r1 systemd toolchain-funcs udev usr-ldscript
 
 DESCRIPTION="System and service manager for Linux"
 HOMEPAGE="http://systemd.io/"
@@ -41,6 +41,7 @@ MINKV="4.15"
 COMMON_DEPEND="
 	>=sys-apps/util-linux-2.30:0=[${MULTILIB_USEDEP}]
 	sys-libs/libcap:0=[${MULTILIB_USEDEP}]
+	virtual/libcrypt:=[${MULTILIB_USEDEP}]
 	acl? ( sys-apps/acl:0= )
 	apparmor? ( sys-libs/libapparmor:0= )
 	audit? ( >=sys-process/audit-2:0= )
@@ -359,7 +360,7 @@ multilib_src_install_all() {
 	keepdir /var/log/journal
 
 	# Symlink /etc/sysctl.conf for easy migration.
-	dosym ../../../etc/sysctl.conf /usr/lib/sysctl.d/99-sysctl.conf
+	dosym ../sysctl.conf /etc/sysctl.d/99-sysctl.conf
 
 	if use pam; then
 		newpamd "${FILESDIR}"/systemd-user.pam systemd-user

@@ -160,7 +160,7 @@ src_install() {
 	default
 
 	insinto /etc
-	newins src/dircolors.hin DIR_COLORS
+	doins "${FILESDIR}"/DIR_COLORS
 
 	if use split-usr ; then
 		cd "${ED}"/usr/bin || die
